@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo DOM con javascript</title>
+</head>
+
+<body>
+    <h1>Ejemplo DOM con JavaScript</h1>
+    <p>
+
+        Saludos!!!
+    </p>
+    <script>
+
+class DispositivoEntrada{
+    
+    constructor(tipoEntarda, marca){
+        this._tipoEntarda = tipoEntarda;
+        this._marca = marca;
+    }
+
+    get tipoEntarda(){
+        return this._tipoEntarda;
+    }
+    set tipoEntarda(tipoEntarda){
+        this._tipoEntarda = tipoEntarda;
+    }
+    get marca(){
+        return this._marca;
+    }
+    set marca(marca){
+        this._tipoEntarda= marca;
+    }
+}
+
+class Raton extends DispositivoEntrada{
+    static contadorRatones = 0;
+
+    constructor(tipoEntarda, marca){
+        super(tipoEntarda, marca);
+        this._idRaton = ++Raton.contadorRatones;
+    }
+    get idRaton(){
+        return this._idRaton;
+    }
+
+    toString(){
+        return `Id Raton: ${this._idRaton} Tipo Entrada: ${this._tipoEntarda} Marca: ${this._marca}`
+    }
+
+}
+
+class Teclado extends DispositivoEntrada{
+    static contadorTeclados = 0;
+
+    constructor(tipoEntarda, marca){
+        super(tipoEntarda, marca);
+        this._idTeclado = ++Teclado.contadorTeclados;
+    }
+    get idTeclado(){
+        return this._idTeclado;
+    }
+
+    toString(){
+        return `Id Teclado: ${this._idTeclado} Tipo Entrada: ${this._tipoEntarda} Marca: ${this._marca}`
+    }
+
+}
+
+class Monitor{
+    static contadorMonitores = 0;
+
+    constructor(marca, tamanio){
+        this._idMonitor = ++Monitor.contadorMonitores;
+        this._marca = marca;
+        this._tamanio = tamanio; 
+    }
+
+    get idMonitor(){
+        return this._idMonitor;
+    }
+
+    get marca(){
+        return _this._marca;
+    }
+    set marca(marca){
+        this._marca = marca;
+    }
+    get tamanio(){
+        return _this._tamanio;
+    }
+    set tamanio(tamanio){
+        this._tamanio = tamanio;
+    }
+
+    toString(){ 
+        return `Id Monitor: ${this._idMonitor} Marca: ${this._marca} Tamaño: ${this._tamanio}`
+    }
+
+}
+
+class Computadora{
+
+    static contadorComputadoras = 0;
+    
+    constructor(nombre, Raton, Teclado, Monitor){
+        this._idComputadora = ++Computadora.contadorComputadoras;
+        this._nombre = nombre;
+        this._raton = raton;
+        this._teclado = teclado;
+        this._monitor = monitor;
+    }
+
+    get idComputadora(){
+        return this._idComputadora;
+    }
+
+    get nombre(){
+        return this._nombre;
+    }
+    set nombre(nombre){
+        this._nombre = nombre;
+    }
+
+    toString(){
+        return  `Computadora ${this._idComputadora}: ${this._nombre} \n ${this._monitor} \n ${this._raton} \n ${this._teclado}`;
+    }
+
+}
+
+class Orden{
+
+    static contadorOrdenes = 0;
+
+    constructor(){
+        this._idOrden = ++Orden.contadorOrdenes;
+        this._computadoras = [];
+    }
+
+    get idOrden(){
+        return this._idOrden;
+    }
+
+    agregarComputadora(computadora){
+        this._computadoras.push(computadora); 
+    }
+
+    mostrarOrden(){
+        let computadoraOrden = '';
+        for( let computadora of this._computadoras){
+            computadoraOrden += '\n{' + computadora.toString() + '}';
+        }
+
+        console.log(`Orden: ${this._idOrden} , Computadora: ${computadoraOrden} `);
+    }
+
+
+}
+
+
+
+let raton = new Raton('USB','Dell');
+console.log(raton.toString());
+let teclado = new Teclado('USB','Dell');
+console.log(teclado.toString());
+let monitor = new Monitor('Panasonic', '15')
+console.log(monitor.toString());
+
+let compu = new Computadora('computin', raton, teclado, monitor);
+console.log(`${compu}`);
+
+let compu2 = new Computadora('computin', raton, teclado, monitor);
+console.log(`${compu2}`);
+
+let orden1 = new Orden();
+orden1.agregarComputadora(compu);
+orden1.agregarComputadora(compu2);
+orden1.mostrarOrden();
+    </script>
+
+</body>
+
+</html>
